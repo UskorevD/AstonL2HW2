@@ -1,50 +1,53 @@
-# Задание 2
+# Задание 4
 ## Обязательно к выполнению:
-* SQL, Hibernate
-* Разработать консольное приложение(user-service) на Java, использующее Hibernate для взаимодействия с PostgreSQL, без использования Spring. 
-* Приложение должно поддерживать базовые операции CRUD (Create, Read, Update, Delete) над сущностью User.
-## Требования:
-* Использовать Hibernate в качестве ORM.
-* База данных — PostgreSQL.
-* Настроить Hibernate без Spring, используя hibernate.cfg.xml или properties-файл.
-* Реализовать CRUD-операции для сущности User (создание, чтение, обновление, удаление), которая состоит из полей: id, name, email, age, created_at.
-* Использовать консольный интерфейс для взаимодействия с пользователем.
-* Использовать Maven для управления зависимостями.
-* Настроить логирование.
-* Настроить транзакционность для операций с базой данных.
-* Использовать DAO-паттерн для отделения логики работы с БД.
-* Обработать возможные исключения, связанные с Hibernate и PostgreSQL
+* Spring
+* Добавить в user-service поддержку Spring и разработать API, которое позволит управлять данными.
+* Использовать необходимые модули spring(boot, web, data etc).
+* Реализовать api для получения, создания, обновления и удаления юзера. Важно, entity не должен возвращаться из контроллера, необходимо использовать dto.
+* Заменить Hibernate на Spring data JPA.
+* Написать тесты для API(можно делать это при помощи mockMvc или других средств)
 
-# Выполнено
 ## Технологии
-- Java 21
-- Maven
-- Hibernate ORM
-- PostgreSQL
-- Log4j2
+* Java 21
+* Spring Boot
+* Spring Web
+* Spring Data JPA
+* Spring Validation
+* PostgreSQL
+* Maven
+* JUnit
+* MockMvc
 
-## Возможности
-- Создание пользователя
-- Поиск пользователя по ID
-- Просмотр всех пользователей
-- Обновление данных пользователя
-- Удаление пользователя
-- Валидация пользовательского ввода
-- Логирование событий и ошибок
+## Выполнено
+* Spring Boot приложение.
+* REST API для создания, получения, обновления и удаления пользователей.
+* Spring Data JPA для работы с базой данных.
+* DTO для запросов и ответов.
+* Валидация входных данных.
+* Обработка ошибок и исключений.
+* Тестирование API с использованием MockMvc.
 
 ## Структура проекта
-
-- `entity` — сущность `User`
-- `dao` — интерфейс DAO и реализация операций с базой данных
-- `config` — настройка Hibernate
-- `validation` — проверка данных
-- `Main` — точка входа и консольный интерфейс
+* controller — REST API для обработки HTTP-запросов.
+* dto — объекты запросов и ответов API.
+* entity — сущности базы данных.
+* exception — исключения и обработка ошибок.
+* repository — доступ к данным через Spring Data JPA.
+* service — бизнес-логика приложения.
+* resources — конфигурация приложения.
+* test — тестирование REST API с использованием MockMvc.
 
 ## Чтобы запустить и проверить
 
 1. Установите PostgreSQL и создайте базу данных `user_service`.
-2. Пароль и имя пользователя напишите в локальном файле `hibernate-local.cfg.xml`.
-3. Общие настройки Hibernate указаны в `hibernate.cfg.xml`.
+2. В src\main\resources создайте файл `application.properties` cо следующим содержимым:
+```
+spring.datasource.url=jdbc:postgresql://localhost:5432/user_service
+spring.datasource.username=USERNAME
+spring.datasource.password=PASSWORD
 
-## Логирование
-Log4j2 выводит сообщения приложения в консоль и записывает их в `logs/user-service.log`.
+spring.jpa.hibernate.ddl-auto=validate
+spring.jpa.show-sql=true
+```
+3. Замените USERNAME и PASSWORD на свои имя пользователя и пароль.
+4. Не забудьте добавить `application.properties` в .gitignore и убедитесь, что файл не попадает в Git.

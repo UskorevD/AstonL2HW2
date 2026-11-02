@@ -1,4 +1,5 @@
 src/main/resources/hibernate-local.cfg.xml
+src/main/resources/application.properties
 
 target/
 
